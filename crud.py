@@ -135,10 +135,6 @@ def deletar_funcionario(nomeFuncionario):
     cursor.execute(deletefuncionario)
     conexao.commit()
 
-def deletar_tarefa(idTarefa):
-    deletetarefa = f'DELETE FROM Tarefa WHERE idTarefa = "{idTarefa}"'
-    cursor.execute(deletetarefa)
-    conexao.commit()
 
 def deletar_tarefa(idTarefa):
     deletetarefa = f'DELETE FROM Tarefa WHERE idTarefa = "{idTarefa}"'
@@ -165,15 +161,115 @@ def deletar_documentacao(idDocumento):
     cursor.execute(deletedocumento)
     conexao.commit()
 
+#UPDATE - Atualizar informações do banco
+
+def atualizar_funcionario():
+    nomeFuncionario = input("Digite o nome do funcionário a ser atualizado: ")
+    novo_email = input("Digite o novo e-mail: ")
+    novo_telefone = input("Digite o novo telefone: ")
+    novo_endereco = input("Digite o novo endereço: ")
+    nova_data_cadastro = input("Digite a nova data de cadastro: ")
+    novo_id_supervisor = input("Digite o novo ID do supervisor: ")
+
+    update_funcionario = '''
+        UPDATE Funcionario
+        SET 
+            email = %s,
+            telefone = %s,
+            endereco = %s,
+            dtCadastro = %s,
+            idSupervisor = %s
+        WHERE nomeFuncionario = %s
+    '''
+
+    valores = (novo_email, novo_telefone, novo_endereco, nova_data_cadastro, novo_id_supervisor, nomeFuncionario)
+    cursor.execute(update_funcionario, valores)
+    conexao.commit()
+    print("Registro atualizado com sucesso!")
+
+def atualizar_tarefa():
+    idTarefa = input("Digite o ID da tarefa a ser atualizada: ")
+    novo_titulo = input("Digite o novo título da tarefa: ")
+    nova_descricao = input("Digite a nova descrição da tarefa: ")
+    novo_dtVencimento = input("Digite a nova data de vencimento da tarefa: ")
+    nova_prioridade = input("Digite a nova prioridade da tarefa: ")
+    novo_dtCriacao = input("Digite a nova data de criação da tarefa: ")
+    novo_dtConclusao = input("Digite a nova data de conclusão da tarefa: ")
+
+    update_tarefa = '''
+        UPDATE Tarefa
+        SET 
+            tituloTarefa = %s,
+            descricao = %s,
+            dtVencimento = %s,
+            prioridade = %s,
+            dtCriacao = %s,
+            dtConclusao = %s
+        WHERE idTarefa = %s
+    '''
+
+    valores = (novo_titulo, nova_descricao, novo_dtVencimento, nova_prioridade, novo_dtCriacao, novo_dtConclusao, idTarefa)
+    cursor.execute(update_tarefa, valores)
+    conexao.commit()
+    print("Registro de tarefa atualizado com sucesso!")
+
+def atualizar_projeto():
+    idProjeto = input("Digite o ID do projeto a ser atualizado: ")
+    novo_nome = input("Digite o novo nome do projeto: ")
+    nova_descricao = input("Digite a nova descrição do projeto: ")
+    nova_dtConclusao = input("Digite a nova data de conclusão do projeto: ")
+    nova_dtInicio = input("Digite a nova data de início do projeto: ")
+
+    update_projeto = '''
+        UPDATE Projeto
+        SET 
+            nomeProjeto = %s,
+            descricao = %s,
+            dtConclusao = %s,
+            dtInicio = %s
+        WHERE idProjeto = %s
+    '''
+
+    valores = (novo_nome, nova_descricao, nova_dtConclusao, nova_dtInicio, idProjeto)
+    cursor.execute(update_projeto, valores)
+    conexao.commit()
+    print("Registro de projeto atualizado com sucesso!")
+
+def atualizar_categoria():
+    nomeCategoria = input("Digite o nome da categoria a ser atualizada: ")
+    nova_descricao = input("Digite a nova descrição: ")
+
+    update_categoria = '''
+        UPDATE Categoria
+        SET descricao = %s
+        WHERE nomeCategoria = %s
+    '''
+
+    valores = (nova_descricao, nomeCategoria)
+    cursor.execute(update_categoria, valores)
+    conexao.commit()
+    print("Registro de categoria atualizado com sucesso!")
 
 
+def atualizar_equipe():
+    nomeEquipe = input("Digite o nome da equipe a ser atualizada: ")
+    nova_descricao = input("Digite a nova descrição da equipe: ")
+    nova_dtFormacao = input("Digite a nova data de formação da equipe: ")
+    novo_apoio = input("Digite S ou N para a nova condição de equipe de apoio: ")
 
-#UPDATE - editar o banco de dados
-nome_produto = "todynho"
-valor = 6
-update = f'UPDATE vendas SET valor = {valor} WHERE nome_produto = "{nome_produto}"'
-cursor.execute(update)
-conexao.commit()
+    update_equipe = '''
+        UPDATE Equipe
+        SET 
+            descricao = %s,
+            dtFormacao = %s,
+            apoio = %s
+        WHERE nomeEquipe = %s
+    '''
+
+    valores = (nova_descricao, nova_dtFormacao, novo_apoio, nomeEquipe)
+    cursor.execute(update_equipe, valores)
+    conexao.commit()
+    print("Registro de equipe atualizado com sucesso!")
 
 
 #encerrar o cursor e a conexão
