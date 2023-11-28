@@ -1,7 +1,6 @@
 # SecTask
 
 ## NO UBUNTU ou DEBIAN:
----
 
 Confira a versão do python se se encontra na versão 3.10.6
 
