@@ -1,17 +1,179 @@
 import mysql.connector
 
-conexao = mysql.connector.connect(
-    host='localhost',
-    user='root',
-    password='0000',
-    database='sectask',
+#FUNÇÃO PRINCIPAL 
+
+#conectar ao banco de dados
+
+def main():
+
+    conexao = mysql.connector.connect(
+        host='localhost',
+        user='root',
+        password='0000',
+        database='sectask',
     )
 
-cursor = conexao.cursor()
+    cursor = conexao.cursor()
+
+    while True:
+
+        print("Operações disponíveis:")
+        print("1. Funcionário")
+        print("2. Equipe")
+        print("3. Categoria")
+        print("4. Projeto")
+        print("5. Tarefa")
+        print("6. Documento")
+
+        opcao = input("Escolha a operação: ")
+
+        if opcao == '1':
+            print("Operações disponíveis:")
+            print("1. Criar Funcionário")
+            print("2. Atualizar Funcionário")
+            print("3. Ver Funcionário")
+            print("4. Deletar Funcionário")
+            print("5. Sair")
+
+            opcao = input("Escolha a operação: ")
+
+            if opcao == '1':
+                criar_funcionario(cursor)
+            elif opcao == '2':
+                ler_funcionario(cursor)
+            elif opcao == '3':
+                atualizar_funcionario(cursor)
+            elif opcao == '4':
+                deletar_funcionario(cursor)
+            elif opcao == '5':
+                break
+            else:
+                print("Opção inválida. Tente novamente.")
+
+
+        elif opcao == '2':
+            print("Operações disponíveis:")
+            print("1. Criar Equipe")
+            print("2. Atualizar Equipe")
+            print("3. Ver Equipe")
+            print("4. Deletar Equipe")
+            print("5. Sair")
+
+            opcao = input("Escolha a operação: ")
+
+            if opcao == '1':
+                criar_tarefa(cursor)
+            elif opcao == '2':
+                ler_tarefa(cursor)
+            elif opcao == '3':
+                atualizar_tarefa(cursor)
+            elif opcao == '4':
+                deletar_tarefa(cursor)
+            elif opcao == '5':
+                break
+            else:
+                print("Opção inválida. Tente novamente.")
+
+        elif opcao == '3':
+            print("Operações disponíveis:")
+            print("1. Criar Categoria")
+            print("2. Atualizar Categoria")
+            print("3. Ver Categoria")
+            print("4. Deletar Categoria")
+            print("5. Sair")
+
+            opcao = input("Escolha a operação: ")
+
+            if opcao == '1':
+                criar_projeto(cursor)
+            elif opcao == '2':
+                ler_projeto(cursor)
+            elif opcao == '3':
+                atualizar_projeto(cursor)
+            elif opcao == '4':
+                deletar_projeto(cursor)
+            elif opcao == '5':
+                break
+            else:
+                print("Opção inválida. Tente novamente.")
+
+        elif opcao == '4':
+            print("Operações disponíveis:")
+            print("1. Criar Projeto")
+            print("2. Atualizar Projeto")
+            print("3. Ver Projeto")
+            print("4. Deletar Projeto")
+            print("5. Sair")
+
+            opcao = input("Escolha a operação: ")
+
+            if opcao == '1':
+                criar_equipe(cursor)
+            elif opcao == '2':
+                ler_equipe(cursor)
+            elif opcao == '3':
+                atualizar_equipe(cursor)
+            elif opcao == '4':
+                deletar_equipe(cursor)
+            elif opcao == '5':
+                break
+            else:
+                print("Opção inválida. Tente novamente.")
+
+        elif opcao == '5':
+            print("Operações disponíveis:")
+            print("1. Criar Tarefa")
+            print("2. Atualizar Tarefa")
+            print("3. Ver Tarefa")
+            print("4. Deletar Tarefa")
+            print("5. Sair")
+
+            opcao = input("Escolha a operação: ")
+
+            if opcao == '1':
+                criar_categoria(cursor)
+            elif opcao == '2':
+                ler_categoria(cursor)
+            elif opcao == '3':
+                atualizar_categoria(cursor)
+            elif opcao == '4':
+                deletar_categoria(cursor)
+            elif opcao == '5':
+                break
+            else:
+                print("Opção inválida. Tente novamente.")
+
+
+        elif opcao == '6':
+            print("Operações disponíveis:")
+            print("1. Criar Documento")
+            print("2. Atualizar Documento")
+            print("3. Ver Documento")
+            print("4. Deletar Documento")
+            print("5. Sair")
+
+            opcao = input("Escolha a operação: ")
+
+            if opcao == '1':
+                criar_documento(cursor)
+            elif opcao == '2':
+                ler_documentacao(cursor)
+            elif opcao == '3':
+                atualizar_documento(cursor)
+            elif opcao == '4':
+                deletar_documentacao(cursor)
+            elif opcao == '5':
+                break
+            else:
+                print("Opção inválida. Tente novamente.")
+
+            
+
+#FUNCÕES DE CRUD
 
 #CREATE - criar uma informação na tabelas
 
-def criar_funcionario():
+def criar_funcionario(cursor):
     nomeFuncionario = input("Digite seu nome: ")
     email = input("Digite seu e-mail: ")
     telefone = input("Digite seu telefone: ")
@@ -24,7 +186,7 @@ def criar_funcionario():
     conexao.commit()
     print("Registro criado com sucesso!")
 
-def criar_tarefa():
+def criar_tarefa(cursor):
     tituloTarefa = input("Digite o titulo da tarefa: ")
     descricao = input("Digite a descrição da tarefa: ")
     dtVencimento = input("Digite a data de vencimento: ")
@@ -38,7 +200,7 @@ def criar_tarefa():
     print("Registro criado com sucesso!")
 
 
-def criar_projeto():
+def criar_projeto(cursor):
     nomeProjeto = input("Digite o nome do Projeto: ")
     descricao = input("Digite a descrição do Projeto: ")
     dtConclusao = input("Digite a data da conclusão do Projeto: ")
@@ -49,7 +211,7 @@ def criar_projeto():
     conexao.commit()
     print("Registro criado com sucesso!")
 
-def criar_equipe():
+def criar_equipe(cursor):
     nomeEquipe = input("Digite o nome da Equipe: ")
     descricao = input("Digite a descrição da Equipe: ")
     dtFormacao = input("Digite a data de formação da equipe: ")
@@ -60,8 +222,8 @@ def criar_equipe():
     conexao.commit()
     print("Registro criado com sucesso!")
 
-def criar_categoria():
-    nomeCategotia = input("Digite o nome da Categoria: ")
+def criar_categoria(cursor):
+    nomeCategoria = input("Digite o nome da Categoria: ")
     descricao = input("Digite a descrição da Categoria: ")
     createcategoria = 'INSERT INTO Categoria (nomeCategoria, descricao) VALUES (%s, %s)'
     valores = (nomeCategoria, descricao)
@@ -69,7 +231,7 @@ def criar_categoria():
     conexao.commit()
     print("Registro criado com sucesso!")
 
-def criar_documento():
+def criar_documento(cursor):
     tituloDocumento = input("Digite o titulo do Documento: ")
     dtPublicacao = input("Digite a data da publicaçao: ")
     createdocumento = 'INSERT INTO Documentacao (tituloDocumento, dtPublicacao) VALUES (%s, %s)'
@@ -82,7 +244,7 @@ def criar_documento():
 
 #READ - ler dados nas tabelas
 
-def ler_funcionario():
+def ler_funcionario(cursor):
     readfuncionario = f'SELECT * FROM Funcionario'
     cursor.execute(readfuncionario)
     resultados = cursor.fetchall()
@@ -90,7 +252,7 @@ def ler_funcionario():
         print(resultado)
 
 
-def ler_tarefa():
+def ler_tarefa(cursor):
     readtarefa = f'SELECT * FROM Tarefa'
     cursor.execute(readtarefa)
     resultados = cursor.fetchall()
@@ -98,21 +260,21 @@ def ler_tarefa():
         print(resultado)
 
 
-def ler_projeto():
+def ler_projeto(cursor):
     readprojeto = f'SELECT * FROM Projeto'
     cursor.execute(readprojeto)
     resultados = cursor.fetchall()
     for resultado in resultados:
         print(resultado)
 
-def ler_categoria():
+def ler_categoria(cursor):
     readcategoria = 'SELECT * FROM Categoria'
     cursor.execute(readcategoria)
     resultados = cursor.fetchall()
     for resultado in resultados:
         print(resultado)
 
-def ler_equipe():
+def ler_equipe(cursor):
     readequipe = 'SELECT * FROM Equipe'
     cursor.execute(readequipe)
     resultados = cursor.fetchall()
@@ -120,7 +282,7 @@ def ler_equipe():
         print(resultado)
 
 
-def ler_documentacao():
+def ler_documentacao(cursor):
     readocumento = 'SELECT * FROM Documentacao'
     cursor.execute(readocumento)
     resultados = cursor.fetchall()
@@ -130,40 +292,39 @@ def ler_documentacao():
 
 #DELETE - deletar informações do banco
 
-def deletar_funcionario(nomeFuncionario):
-    deletefuncionario = f'DELETE FROM Funcionario WHERE nomeFuncionario = "{nomeFuncionario}"'
+def deletar_funcionario(cursor, idFuncionario):
+    deletefuncionario = f'DELETE FROM Funcionario WHERE idFuncionario = "{idFuncionario}"'
     cursor.execute(deletefuncionario)
     conexao.commit()
 
-
-def deletar_tarefa(idTarefa):
+def deletar_tarefa(cursor, idTarefa):
     deletetarefa = f'DELETE FROM Tarefa WHERE idTarefa = "{idTarefa}"'
     cursor.execute(deletetarefa)
     conexao.commit()
 
-def deletar_projeto(idProjeto):
+def deletar_projeto(cursor, idProjeto):
     deleteprojeto = f'DELETE FROM Projeto WHERE idProjeto = "{idProjeto}"'
     cursor.execute(deleteprojeto)
     conexao.commit()
 
-def deletar_equipe(nomeEquipe):
+def deletar_equipe(cursor, nomeEquipe):
     deletequipe = f'DELETE FROM Equipe WHERE nomeEquipe = "{nomeEquipe}"'
     cursor.execute(deletequipe)
     conexao.commit()
 
-def deletar_categoria(idCategoria):
+def deletar_categoria(cursor, idCategoria):
     deletecategoria = f'DELETE FROM Categoria WHERE idCategoria = "{idCategoria}"'
     cursor.execute(deletecategoria)
     conexao.commit()
 
-def deletar_documentacao(idDocumento):
+def deletar_documentacao(cursor, idDocumento):
     deletedocumento = f'DELETE FROM Documentacao WHERE idDocumento = "{idDocumento}"'
     cursor.execute(deletedocumento)
     conexao.commit()
 
 #UPDATE - Atualizar informações do banco
 
-def atualizar_funcionario():
+def atualizar_funcionario(cursor):
     nomeFuncionario = input("Digite o nome do funcionário a ser atualizado: ")
     novo_email = input("Digite o novo e-mail: ")
     novo_telefone = input("Digite o novo telefone: ")
@@ -187,7 +348,7 @@ def atualizar_funcionario():
     conexao.commit()
     print("Registro atualizado com sucesso!")
 
-def atualizar_tarefa():
+def atualizar_tarefa(cursor):
     idTarefa = input("Digite o ID da tarefa a ser atualizada: ")
     novo_titulo = input("Digite o novo título da tarefa: ")
     nova_descricao = input("Digite a nova descrição da tarefa: ")
@@ -213,7 +374,7 @@ def atualizar_tarefa():
     conexao.commit()
     print("Registro de tarefa atualizado com sucesso!")
 
-def atualizar_projeto():
+def atualizar_projeto(cursor):
     idProjeto = input("Digite o ID do projeto a ser atualizado: ")
     novo_nome = input("Digite o novo nome do projeto: ")
     nova_descricao = input("Digite a nova descrição do projeto: ")
@@ -235,7 +396,7 @@ def atualizar_projeto():
     conexao.commit()
     print("Registro de projeto atualizado com sucesso!")
 
-def atualizar_categoria():
+def atualizar_categoria(cursor):
     nomeCategoria = input("Digite o nome da categoria a ser atualizada: ")
     nova_descricao = input("Digite a nova descrição: ")
 
@@ -251,7 +412,7 @@ def atualizar_categoria():
     print("Registro de categoria atualizado com sucesso!")
 
 
-def atualizar_equipe():
+def atualizar_equipe(cursor):
     nomeEquipe = input("Digite o nome da equipe a ser atualizada: ")
     nova_descricao = input("Digite a nova descrição da equipe: ")
     nova_dtFormacao = input("Digite a nova data de formação da equipe: ")
@@ -270,6 +431,26 @@ def atualizar_equipe():
     cursor.execute(update_equipe, valores)
     conexao.commit()
     print("Registro de equipe atualizado com sucesso!")
+
+
+def atualizar_documento(cursor):
+    id_documento = input("Digite o ID do documento a ser atualizado: ")
+    novo_titulo = input("Digite o novo título do documento: ")
+    nova_dtPublicacao = input("Digite a nova data de publicação do documento: ")
+
+    update_documento = '''
+        UPDATE Documentacao
+        SET 
+            tituloDocumento = %s,
+            dtPublicacao = %s
+        WHERE idDocumento = %s
+    '''
+    
+    values = (novo_titulo, nova_dtPublicacao, id_documento)
+
+    cursor.execute(update_documento, values)
+    conexao.commit()
+    print("Registro de documento atualizado com sucesso!")
 
 
 #encerrar o cursor e a conexão
