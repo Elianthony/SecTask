@@ -45,3 +45,37 @@ Para desativar o ambiente:
 ```
 deactivate
 ```
+
+Para conectar no MySQL Server no windows via WSL2 é preciso verificar como o seu subsistema do linux está resolvendo a conexão com o servidor local, essa variável está armazenada no seguinte arquivo
+
+```
+nano /etc/resolv.conf
+```
+
+*Copie o valor de nameserver para o host de conexão do servidor do banco com a porta configurada (normalmente a padrão é 3306) e o usuário e senha que você criou no seu servidor MySQL e poderá se conectar.
+
+**LEMBRE-SE! Esse valor altera toda vez que o subsistema do Linux é iniciado.
+
+Verifique no seu Mysql Server pelo CLI se ele tem usuário cadastrado:
+
+```
+SELECT user, host FROM mysql.user;
+```
+
+Apague qualquer usuário que você criou acidentalmente apenas deixando os padrões do sistema com:
+
+```
+DROP USER '<user>'@'%';
+```
+
+Crie o novo usuário que usará para conexão para permitir acesso dele de qualquer ip
+
+```
+CREATE USER '<user>'@'%' IDENTIFIED BY '<passwd>';
+```
+
+Garanta o acesso dele a qualquer banco ou schema construído dentro do servidor:
+
+```
+GRANT ALL PRIVILEGES ON *.* TO '<user>'@'%' WITH GRANT OPTION;
+```
